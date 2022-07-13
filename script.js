@@ -1,3 +1,15 @@
+var timerEl = document.getElementById('timer');
+var startBtn = document.getElementById('start');
+var timeLeft = 75;
+
+startBtn.addEventListener('click', function () {
+    setInterval(function () {
+        timeLeft -= 1;
+        timerEl.textContent = timeLeft;
+    }, 1000);
+})
+
+
 var quizData = [
     {
         question: "Who won the Superbowl in 2022?",
@@ -19,18 +31,20 @@ var quizData = [
         question: "Will Donovan Mitchell be traded?",
         a: "Yes",
         b: "No",
-        correct: "b",
+        c: "Maybe",
+        d: "I don't know",
+        correct: "a",
     },
-]
+];
 
 var quiz = document.getElementById('quiz');
-var answerEl = document.querySelectorAll('.answer');
+var answerEls = document.querySelectorAll('.answer');
 var questionEl = document.getElementById('question');
 var a_text = document.getElementById('a_text');
 var b_text = document.getElementById('b_text');
 var c_text = document.getElementById('c_text');
 var d_text = document.getElementById('d_text');
-var submitBtn = document.getElementById('submit'); 
+var nextBtn = document.getElementById('next'); 
 
 let currentQuiz = 0
 let score = 0
@@ -48,12 +62,12 @@ function loadQuiz() {
 }
 
 function deselectAnswers() {
-    answerEl.forEach(answerEl => answerEl.checked = false);
+    answerEls.forEach(answerEls => answerEls.checked = false);
 }
 
 function getSelected() {
     let answerEl;
-    answerEl.forEach(answerEl => {
+    answerEls.forEach(answerEl => {
         if(answerEl.checked) {
             answer = answerEl.id
         }
@@ -61,7 +75,7 @@ function getSelected() {
     return answer;
 }
 
-submitBtn.addEventListener('click', () => {
+nextBtn.addEventListener('click', () => {
     var answer = getSelected() 
     if(answer) {
         if(answer === quizData[currentQuiz].correct) {
@@ -75,8 +89,6 @@ submitBtn.addEventListener('click', () => {
     } else {
         quiz.innerHTML = `
         <h2>You answered ${score}/${quizData.length} questions correctly</h2>
-
-        <button onclick="location.reload()">Reload</button>
         `
     }
 }
@@ -120,9 +132,9 @@ submitBtn.addEventListener('click', () => {
 // };
 
 // var questions = {
-//         question: 'What is 1 + 1?',
-//         answers: ['1', '2'],
-//         correctAnswer: 1
+//         question: '',
+//         answers: [],
+//         correctAnswer: 
 //     };
 
 
