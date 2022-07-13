@@ -10,3 +10,13 @@ button {
     font-size: 20px;
     background-color: rgb(45, 143, 107);
 }
+
+.question-container, .end-quiz {
+    display: none;
+    text-align: center;
+    margin: 80px auto;
+}
+
+ul {
+    list-style-type: none;
+}
